@@ -103,70 +103,72 @@ export default function Req3Page() {
         </div>
       </div>
 
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100 border-b">
-            <th className="p-3 text-center w-12">
-              <input
-                type="checkbox"
-                className="w-4 h-4"
-                checked={docs.length > 0 && selectedIds.length === docs.length}
-                onChange={toggleSelectAll}
-              />
-            </th>
-            <th className="p-3 text-left">ลำดับ</th>
-            <th className="p-3 text-left">ชื่อเอกสาร</th>
-            <th className="p-3 text-center">สถานะ</th>
-            <th className="p-3 text-left">เหตุผล</th>
-            <th className="p-3 text-center">การจัดการ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {docs.map((doc, idx) => (
-            <tr key={doc.id} className="border-b hover:bg-gray-50">
-              <td className="p-3 text-center">
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[600px]">
+          <thead>
+            <tr className="bg-gray-100 border-b">
+              <th className="p-3 text-center w-12">
                 <input
-                  disabled={doc.status !== "รออนุมัติ"}
                   type="checkbox"
                   className="w-4 h-4"
-                  checked={selectedIds.includes(doc.id)}
-                  onChange={() => toggleSelect(doc.id)}
+                  checked={docs.length > 0 && selectedIds.length === docs.length}
+                  onChange={toggleSelectAll}
                 />
-              </td>
-              <td className="p-3">{idx + 1}</td>
-              <td className="p-3">{doc.title}</td>
-              <td className="p-3 text-center">
-                <span className={`px-2 py-1 rounded text-xs ${
-                  doc.status === "อนุมัติ" ? "bg-green-100 text-green-700" :
-                  doc.status === "ไม่อนุมัติ" ? "bg-red-100 text-red-700" :
-                  "bg-yellow-100 text-yellow-700"
-                }`}>
-                  {doc.status}
-                </span>
-              </td>
-              <td className="p-3 text-gray-500 italic">{doc.reason || "-"}</td>
-              <td className="p-3 text-center space-x-2">
-                <button
-                  disabled={doc.status !== "รออนุมัติ"}
-                  onClick={() => handleSingleAction(doc.id, "approve")}
-                  className={`p-1 rounded ${doc.status !== "รออนุมัติ" ? "text-gray-300 cursor-not-allowed" : "text-green-600 hover:bg-green-50"}`}
-                  title="อนุมัติ"
-                >
-                  <Check size={20} />
-                </button>
-                <button
-                  disabled={doc.status !== "รออนุมัติ"}
-                  onClick={() => handleSingleAction(doc.id, "reject")}
-                  className={`p-1 rounded ${doc.status !== "รออนุมัติ" ? "text-gray-300 cursor-not-allowed" : "text-red-600 hover:bg-red-50"}`}
-                  title="ไม่อนุมัติ"
-                >
-                  <X size={20} />
-                </button>
-              </td>
+              </th>
+              <th className="p-3 text-left">ลำดับ</th>
+              <th className="p-3 text-left">ชื่อเอกสาร</th>
+              <th className="p-3 text-center">สถานะ</th>
+              <th className="p-3 text-left">เหตุผล</th>
+              <th className="p-3 text-center">การจัดการ</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {docs.map((doc, idx) => (
+              <tr key={doc.id} className="border-b hover:bg-gray-50">
+                <td className="p-3 text-center">
+                  <input
+                    disabled={doc.status !== "รออนุมัติ"}
+                    type="checkbox"
+                    className="w-4 h-4"
+                    checked={selectedIds.includes(doc.id)}
+                    onChange={() => toggleSelect(doc.id)}
+                  />
+                </td>
+                <td className="p-3">{idx + 1}</td>
+                <td className="p-3">{doc.title}</td>
+                <td className="p-3 text-center">
+                  <span className={`px-2 py-1 rounded text-xs ${
+                    doc.status === "อนุมัติ" ? "bg-green-100 text-green-700" :
+                    doc.status === "ไม่อนุมัติ" ? "bg-red-100 text-red-700" :
+                    "bg-yellow-100 text-yellow-700"
+                  }`}>
+                    {doc.status}
+                  </span>
+                </td>
+                <td className="p-3 text-gray-500 italic">{doc.reason || "-"}</td>
+                <td className="p-3 text-center space-x-2">
+                  <button
+                    disabled={doc.status !== "รออนุมัติ"}
+                    onClick={() => handleSingleAction(doc.id, "approve")}
+                    className={`p-1 rounded ${doc.status !== "รออนุมัติ" ? "text-gray-300 cursor-not-allowed" : "text-green-600 hover:bg-green-50"}`}
+                    title="อนุมัติ"
+                  >
+                    <Check size={20} />
+                  </button>
+                  <button
+                    disabled={doc.status !== "รออนุมัติ"}
+                    onClick={() => handleSingleAction(doc.id, "reject")}
+                    className={`p-1 rounded ${doc.status !== "รออนุมัติ" ? "text-gray-300 cursor-not-allowed" : "text-red-600 hover:bg-red-50"}`}
+                    title="ไม่อนุมัติ"
+                  >
+                    <X size={20} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
