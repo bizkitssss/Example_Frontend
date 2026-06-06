@@ -19,10 +19,6 @@ export default function Req10Page() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
-  useEffect(() => {
-    fetchExams();
-  }, []);
-
   const fetchExams = async () => {
     try {
       const res = await api.get("/exams");
@@ -31,6 +27,10 @@ export default function Req10Page() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    fetchExams();
+  }, []);
 
   const handleSubmit = async () => {
     if (!examineeName) {
@@ -67,23 +67,28 @@ export default function Req10Page() {
 
   if (isSubmitted) {
     return (
-      <div className="text-center py-20 bg-green-50 rounded-2xl border-2 border-green-200 shadow-lg">
-        <CheckCircle2 size={80} className="text-green-600 mx-auto mb-6" />
-        <h2 className="text-3xl font-bold text-green-800 mb-2">ส่งข้อสอบเรียบร้อย!</h2>
-        <p className="text-xl text-gray-600 mb-10">
-          คุณ <span className="font-bold text-green-700">{examineeName}</span> ได้คะแนน
-        </p>
-        <div className="inline-block bg-white px-10 py-6 rounded-3xl shadow-md border-4 border-green-500 mb-12">
-          <span className="text-7xl font-black text-green-600">{score}</span>
-          <span className="text-2xl text-gray-400 font-bold ml-2">/ {exams.length}</span>
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+            <h1>IT 10</h1>
         </div>
-        <div>
-          <button
-            onClick={resetExam}
-            className="flex items-center mx-auto bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition-all shadow-lg font-bold"
-          >
-            <RotateCcw size={20} className="mr-2" /> สอบอีกครั้ง
-          </button>
+        <div className="text-center py-20 bg-green-50 rounded-2xl border-2 border-green-200 shadow-lg">
+          <CheckCircle2 size={80} className="text-green-600 mx-auto mb-6" />
+          <h2 className="text-3xl font-bold text-green-800 mb-2">ส่งข้อสอบเรียบร้อย!</h2>
+          <p className="text-xl text-gray-600 mb-10">
+            คุณ <span className="font-bold text-green-700">{examineeName}</span> ได้คะแนน
+          </p>
+          <div className="inline-block bg-white px-10 py-6 rounded-3xl shadow-md border-4 border-green-500 mb-12">
+            <span className="text-7xl font-black text-green-600">{score}</span>
+            <span className="text-2xl text-gray-400 font-bold ml-2">/ {exams.length}</span>
+          </div>
+          <div>
+            <button
+              onClick={resetExam}
+              className="flex items-center mx-auto bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition-all shadow-lg font-bold"
+            >
+              <RotateCcw size={20} className="mr-2" /> สอบอีกครั้ง
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -91,6 +96,9 @@ export default function Req10Page() {
 
   return (
     <div className="max-w-3xl mx-auto pb-20">
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 10</h1>
+      </div>
       <div className="bg-blue-600 text-white p-8 rounded-t-2xl shadow-lg mb-8">
         <h2 className="text-3xl font-bold mb-2">เริ่มทำข้อสอบ</h2>
         <p className="opacity-80">มีทั้งหมด {exams.length} ข้อ กรุณาตอบให้ครบทุกข้อ</p>

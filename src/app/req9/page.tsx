@@ -15,16 +15,6 @@ export default function Req9Page() {
   const [newComment, setNewComment] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetchComments();
-  }, []);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [comments]);
-
   const fetchComments = async () => {
     try {
       const res = await api.get("/comments");
@@ -33,6 +23,10 @@ export default function Req9Page() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
 
   const handleSend = async () => {
     if (!newComment.trim()) return;
@@ -55,6 +49,9 @@ export default function Req9Page() {
 
   return (
     <div className="max-w-3xl mx-auto h-[70vh] flex flex-col">
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 09</h1>
+      </div>
       <h2 className="text-2xl font-bold mb-6 flex items-center">
         <MessageSquare className="mr-2 text-blue-600" /> ระบบคอมเมนต์
       </h2>

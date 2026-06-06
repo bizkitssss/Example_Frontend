@@ -68,6 +68,9 @@ export default function Req4Page() {
 
   return (
     <div className="max-w-2xl mx-auto">
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 04</h1>
+      </div>
       <h2 className="text-2xl font-bold mb-6">จัดการโปรไฟล์ผู้ใช้งาน</h2>
 
       {result && (

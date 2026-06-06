@@ -16,10 +16,6 @@ export default function Req6Page() {
   const [newCode, setNewCode] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const fetchProducts = async () => {
     try {
       const res = await api.get("/products/16");
@@ -28,6 +24,10 @@ export default function Req6Page() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const handleFormatCode = (val: string) => {
     const clean = val.replace(/[^A-Z0-9]/g, "").toUpperCase();
@@ -70,6 +70,9 @@ export default function Req6Page() {
 
   return (
     <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 06</h1>
+      </div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">จัดการรหัสสินค้า (16 หลัก)</h2>
         <button

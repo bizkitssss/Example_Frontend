@@ -25,10 +25,6 @@ export default function Req1Page() {
     address: "",
   });
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   const fetchUsers = async () => {
     try {
       const res = await api.get("/users");
@@ -38,8 +34,14 @@ export default function Req1Page() {
     }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   const handleBirthDateChange = (dateStr: string) => {
-    const age = differenceInYears(new Date(), new Date(dateStr));
+    const birthYear = new Date(dateStr).getFullYear();
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - birthYear;
     setNewUser({ ...newUser, birthDate: dateStr, age: isNaN(age) ? 0 : age });
   };
 
@@ -56,6 +58,9 @@ export default function Req1Page() {
 
   return (
     <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 01</h1>
+      </div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">ระบบจัดการข้อมูลผู้ใช้งาน</h2>
         <button

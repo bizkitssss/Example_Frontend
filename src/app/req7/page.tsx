@@ -18,10 +18,6 @@ export default function Req7Page() {
   const [newCode, setNewCode] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const fetchProducts = async () => {
     try {
       const res = await api.get("/products/36");
@@ -30,6 +26,10 @@ export default function Req7Page() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const handleFormatCode = (val: string) => {
     const clean = val.replace(/[^A-Z0-9]/g, "").toUpperCase();
@@ -54,8 +54,9 @@ export default function Req7Page() {
       setIsAddModalOpen(false);
       setNewCode("");
       fetchProducts();
-    } catch (err: any) {
-      setError(err.response?.status === 409 ? "รหัสสินค้านี้มีอยู่แล้ว" : "เกิดข้อผิดพลาด");
+    } catch (err: unknown) {
+      const status = (err as any).response?.status;
+      setError(status === 409 ? "รหัสสินค้านี้มีอยู่แล้ว" : "เกิดข้อผิดพลาด");
     }
   };
 
@@ -72,6 +73,9 @@ export default function Req7Page() {
 
   return (
     <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 07</h1>
+      </div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">จัดการรหัสสินค้า (36 หลัก)</h2>
         <button

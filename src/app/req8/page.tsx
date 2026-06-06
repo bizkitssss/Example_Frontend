@@ -21,10 +21,6 @@ export default function Req8Page() {
     correctAnswer: "",
   });
 
-  useEffect(() => {
-    fetchExams();
-  }, []);
-
   const fetchExams = async () => {
     try {
       const res = await api.get("/exams");
@@ -33,6 +29,10 @@ export default function Req8Page() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    fetchExams();
+  }, []);
 
   const handleAdd = async () => {
     try {
@@ -63,6 +63,9 @@ export default function Req8Page() {
 
   return (
     <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 08</h1>
+      </div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold flex items-center">
           <ListOrdered className="mr-2 text-blue-600" /> จัดการข้อสอบ

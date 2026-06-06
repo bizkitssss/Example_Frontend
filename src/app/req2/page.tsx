@@ -44,21 +44,30 @@ export default function Req2Page() {
 
   if (view === "profile") {
     return (
-      <div className="text-center py-10">
-        <h2 className="text-2xl font-bold mb-4">ยินดีต้อนรับ</h2>
-        <p className="text-xl text-blue-600 mb-6">คุณคือ: {loggedInUser}</p>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-        >
-          ออกจากระบบ
-        </button>
+      <div>
+        <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+            <h1>IT 02</h1>
+        </div>
+        <div className="text-center py-10">
+          <h2 className="text-2xl font-bold mb-4">ยินดีต้อนรับ</h2>
+          <p className="text-xl text-blue-600 mb-6">คุณคือ: {loggedInUser}</p>
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          >
+            ออกจากระบบ
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-md mx-auto py-10">
+    <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 02</h1>
+      </div>
+      <div className="max-w-md mx-auto py-10">
       <div className="bg-white p-8 border rounded-lg shadow-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">
           {view === "login" ? "ลงชื่อเข้าใช้งาน" : "สมัครสมาชิก"}
@@ -120,6 +129,7 @@ export default function Req2Page() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

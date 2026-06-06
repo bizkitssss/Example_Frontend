@@ -29,38 +29,52 @@ export default function Req5Page() {
 
   if (view === "show") {
     return (
-      <div className="text-center py-20 bg-blue-50 rounded-xl border-2 border-blue-200">
-        <h2 className="text-2xl font-bold text-blue-800 mb-2">หมายเลขคิวของคุณคือ</h2>
-        <div className="text-9xl font-black text-blue-600 my-10 animate-pulse">
-          {currentQueue}
+      <div>
+        <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+            <h1>IT 05</h1>
         </div>
-        <button
-          onClick={() => setView("get")}
-          className="flex items-center mx-auto bg-white text-blue-600 px-6 py-2 rounded-full border border-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-md"
-        >
-          <ArrowLeft size={18} className="mr-2" /> กลับหน้ารับบัตรคิว
-        </button>
+        <div className="text-center py-20 bg-blue-50 rounded-xl border-2 border-blue-200">
+          <h2 className="text-2xl font-bold text-blue-800 mb-2">หมายเลขคิวของคุณคือ</h2>
+          <div className="text-9xl font-black text-blue-600 my-10 animate-pulse">
+            {currentQueue}
+          </div>
+          <button
+            onClick={() => setView("get")}
+            className="flex items-center mx-auto bg-white text-blue-600 px-6 py-2 rounded-full border border-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-md"
+          >
+            <ArrowLeft size={18} className="mr-2" /> กลับหน้ารับบัตรคิว
+          </button>
+        </div>
       </div>
     );
   }
 
   if (view === "reset") {
     return (
-      <div className="text-center py-20 bg-red-50 rounded-xl border-2 border-red-200">
-        <h2 className="text-2xl font-bold text-red-800 mb-2">ระบบล้างคิวสำเร็จ</h2>
-        <p className="text-red-600 mb-10 text-xl font-bold">คิวถูกรีเซ็ตไปที่เริ่มต้นแล้ว</p>
-        <button
-          onClick={() => setView("get")}
-          className="flex items-center mx-auto bg-white text-red-600 px-6 py-2 rounded-full border border-red-600 hover:bg-red-600 hover:text-white transition-all shadow-md"
-        >
-          <ArrowLeft size={18} className="mr-2" /> กลับหน้ารับบัตรคิว
-        </button>
+      <div>
+        <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+            <h1>IT 05</h1>
+        </div>
+        <div className="text-center py-20 bg-red-50 rounded-xl border-2 border-red-200">
+          <h2 className="text-2xl font-bold text-red-800 mb-2">ระบบล้างคิวสำเร็จ</h2>
+          <p className="text-red-600 mb-10 text-xl font-bold">คิวถูกรีเซ็ตไปที่เริ่มต้นแล้ว</p>
+          <button
+            onClick={() => setView("get")}
+            className="flex items-center mx-auto bg-white text-red-600 px-6 py-2 rounded-full border border-red-600 hover:bg-red-600 hover:text-white transition-all shadow-md"
+          >
+            <ArrowLeft size={18} className="mr-2" /> กลับหน้ารับบัตรคิว
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-md mx-auto py-10 text-center">
+    <div>
+      <div className="flex items-center justify-center bg-[#2f8f46] text-white font-bold rounded-t-md min-h-[58px] px-[18px] py-[12px] mb-4">
+          <h1>IT 05</h1>
+      </div>
+      <div className="max-w-md mx-auto py-10 text-center">
       <div className="bg-white p-10 border rounded-2xl shadow-lg border-blue-100">
         <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <Ticket size={48} className="text-blue-600" />
@@ -84,6 +98,7 @@ export default function Req5Page() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
