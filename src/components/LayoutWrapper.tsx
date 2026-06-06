@@ -41,7 +41,7 @@ export default function LayoutWrapper({
         }`}
       >
         <div className="p-4 border-b flex justify-between items-center">
-          <h1 className="text-xl font-bold text-blue-600 truncate">APPLICATION_UI</h1>
+          <Link href="/"><h1 className="text-xl font-bold text-blue-600 truncate">APPLICATION_UI</h1></Link>
           <button
             className="text-gray-500 hover:text-blue-600 transition-colors"
             onClick={() => setIsSidebarOpen(false)}
@@ -89,7 +89,7 @@ export default function LayoutWrapper({
             <h2 className="text-lg font-semibold text-gray-800 ml-4">System Dashboard</h2>
           </div>
           <div className="hidden md:block text-sm text-gray-500 italic">
-            Next.js + .NET 9 Prototype
+            {/* Next.js + .NET 9 Prototype */}
           </div>
         </header>
 
