@@ -33,12 +33,23 @@ export default function Req3Page() {
     fetchDocs();
   }, []);
 
+  const pendingDocs = docs.filter((d) => d.status === "รออนุมัติ");
+
   const toggleSelectAll = () => {
-    if (selectedIds.length === docs.length) {
+    const pendingIds = pendingDocs.map((d) => d.id);
+    const allSelected = pendingIds.every((id) => selectedIds.includes(id));
+    
+    if (allSelected) {
       setSelectedIds([]);
     } else {
-      setSelectedIds(docs.map((d) => d.id));
+      setSelectedIds(pendingIds);
     }
+
+    // if (selectedIds.length === docs.length) {
+    //   setSelectedIds([]);
+    // } else {
+    //   setSelectedIds(docs.map((d) => d.id));
+    // }
   };
 
   const toggleSelect = (id: number) => {
@@ -111,7 +122,7 @@ export default function Req3Page() {
                 <input
                   type="checkbox"
                   className="w-4 h-4"
-                  checked={docs.length > 0 && selectedIds.length === docs.length}
+                  checked={pendingDocs.length > 0 && pendingDocs.every((d) => selectedIds.includes(d.id))}
                   onChange={toggleSelectAll}
                 />
               </th>
