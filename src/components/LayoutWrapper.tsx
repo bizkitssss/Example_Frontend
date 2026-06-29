@@ -1,8 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+
+const themeChangeEvent = "app-theme-change";
+
+function getThemeSnapshot() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const savedTheme = window.localStorage.getItem("theme");
+
+  if (savedTheme) {
+    return savedTheme === "dark";
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function subscribeTheme(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(themeChangeEvent, callback);
+
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(themeChangeEvent, callback);
+  };
+}
 
 export default function LayoutWrapper({
   children,
@@ -10,6 +36,18 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const isDarkMode = useSyncExternalStore(subscribeTheme, getThemeSnapshot, () => false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    const nextIsDarkMode = !getThemeSnapshot();
+    document.documentElement.classList.toggle("dark", nextIsDarkMode);
+    window.localStorage.setItem("theme", nextIsDarkMode ? "dark" : "light");
+    window.dispatchEvent(new Event(themeChangeEvent));
+  };
 
   const menuItems = [
     { name: "1. User Management", path: "/req1" },
@@ -25,7 +63,7 @@ export default function LayoutWrapper({
   ];
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden relative">
+    <div className="flex h-screen bg-gray-100 overflow-hidden relative transition-colors duration-200">
       {/* Sidebar Overlay for Mobile */}
       {isSidebarOpen && (
         <div
@@ -40,7 +78,7 @@ export default function LayoutWrapper({
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4 border-b flex justify-between items-center">
+        <div className="p-4.5 border-b flex justify-between items-center">
           <Link href="/"><h1 className="text-xl font-bold text-blue-600 truncate">APPLICATION_UI</h1></Link>
           <button
             className="text-gray-500 hover:text-blue-600 transition-colors"
@@ -81,6 +119,8 @@ export default function LayoutWrapper({
         <header className="bg-white shadow-sm border-b px-4 py-3 flex items-center justify-between">
           <div className="flex items-center">
             <button
+              type="button"
+              aria-label="Open sidebar"
               className={`text-gray-500 hover:text-blue-600 transition-all ${isSidebarOpen ? "md:opacity-0 md:pointer-events-none" : "opacity-100"}`}
               onClick={() => setIsSidebarOpen(true)}
             >
@@ -88,9 +128,15 @@ export default function LayoutWrapper({
             </button>
             <h2 className="text-lg font-semibold text-gray-800 ml-4">System Dashboard</h2>
           </div>
-          <div className="hidden md:block text-sm text-gray-500 italic">
-            {/* Next.js + .NET 9 Prototype */}
-          </div>
+          <button
+            type="button"
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDarkMode ? "Light mode" : "Dark mode"}
+            onClick={toggleTheme}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
